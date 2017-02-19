@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import fs from 'fs';
+import path from 'path';
 import moment from 'moment';
 
 const jstring = (obj) => JSON.stringify(obj, null, 2);
@@ -30,7 +31,7 @@ app.post('/api/register', (req, res) => {
 });
 
 app.use('*', (req, res) => {
-  return res.status(400).json({ error: `Unknown route on server "${req.originalUrl}"`});
+  return res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 const server = app.listen(PORT)
