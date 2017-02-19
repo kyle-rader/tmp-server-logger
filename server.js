@@ -12,20 +12,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/api/register', (req, res) => {
-  let data = `Request:
-original_url:
-${req.originalUrl}
+  const data = {
+    original_url: req.originalUrl,
+    query: req.query,
+    body: req.body,
+  };
 
-query:
-${jstring(req.query)}
+  const filename = `request_${moment.now()}.json`;
 
-body:
-${jstring(req.body)}
-`;
-
-
-  const filename = `request_${moment.now()}.txt`;
-  fs.writeFile(filename, data, (err) => {
+  fs.writeFile(filename, jstring(data), (err) => {
     if (err) { console.log(err) }
   });
 

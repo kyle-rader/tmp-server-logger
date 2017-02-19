@@ -1,2 +1,3 @@
 *.txt
+request_*.json
 node_modules/
